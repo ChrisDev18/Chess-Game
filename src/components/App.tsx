@@ -1,7 +1,7 @@
 import React from 'react';
 import './App-style.css';
-import BoardView from "./components/BoardView";
-import Game from "./models/Game";
+import BoardView from "./BoardView";
+import Game from "../models/Game";
 import {useImmer} from "use-immer";
 
 export default function App() {
