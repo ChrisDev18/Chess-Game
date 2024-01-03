@@ -1,26 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App-style.css';
+import BoardView from "./components/BoardView";
+import Game from "./models/Game";
+import {useImmer} from "use-immer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    const [game, setGame] = useImmer(new Game())
+
+    return (
+        <div className="App">
+            <h1>Chess Game</h1>
+            <BoardView gameState={[game, setGame]}/>
+        </div>
+    );
 }
-
-export default App;

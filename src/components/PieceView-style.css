@@ -1,0 +1,28 @@
+.Piece {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  border: unset;
+  -webkit-transition: all 100ms ease-out;
+}
+
+.Piece:hover {
+  transform: scale(0.9);
+}
+
+.Piece:active {
+  transform: scale(0.8);
+
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+  -webkit-transition: all 100ms ease-out;
+}
+
+.Piece:active img {
+  filter: brightness(0.8);
+}

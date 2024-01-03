@@ -1,0 +1,20 @@
+.Square {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: #B7C0D8;
+}
+
+/*To get the checker board*/
+.Square:nth-child(16n-15), :nth-child(16n-13),
+:nth-child(16n-11), :nth-child(16n-9),
+:nth-child(16n-6), :nth-child(16n-4), :nth-child(16n-2),
+:nth-child(16n) {
+    background-color: #E8EDF9;
+}
+
+.Square.Highlighted {
+    background-color: #b1a7f8;
+}

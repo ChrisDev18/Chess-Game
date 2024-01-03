@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background-color: #343944;
+}
+
+h1, a {
+  margin: 0;
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}

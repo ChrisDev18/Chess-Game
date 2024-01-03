@@ -1,0 +1,17 @@
+.ChessBoard {
+  display: grid;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  overflow: clip;
+
+  width: min(70vh, 100%);
+  justify-content: center;
+  align-items: center;
+
+  border: solid 3px #b0b9d0;
+
+  grid-template-columns: repeat(8, 12.5%);
+  grid-template-rows: repeat(8, 12.5%);
+}
