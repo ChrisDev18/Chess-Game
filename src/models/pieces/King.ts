@@ -1,15 +1,22 @@
 import {Colours, Pieces} from "../enums";
 import {CoordinatePair} from "../Move";
-import {Piece} from "./Piece";
+import {free_movement, Piece} from "./Piece";
 import {Square} from "../Square";
 
 export interface King extends Piece {}
 
 export function newKing(colour: Colours, parent: (Square | null) = null): King {
 
-    // TODO: King canMove()
     let canMove = (board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean => {
-        return false;
+        let end_piece = board[end.y][end.x].piece;
+
+        if (end_piece?.colour === colour)
+            return false;
+
+        let dy = end.y - start.y;
+        let dx = end.x - start.x;
+
+        return Math.round(Math.sqrt(dy**2 + dx**2)) == 1 && ! isCompromising(board, start, end);
     }
 
     return {
@@ -22,25 +29,9 @@ export function newKing(colour: Colours, parent: (Square | null) = null): King {
         killed: false,
         highlighted: false
     };
-
 }
 
-function free_movement(board: Square[][], start: number, end: number, y_displacement: boolean, other: number): boolean {
-    let direction: number;
-    if (start > end)
-        direction = -1;
-    else
-        direction = 1;
-
-    for (let i = 0; i <= Math.abs(start - end); i++) {
-        if (y_displacement) {
-            if (board[start + (i * direction)][other] != null)
-                return false;
-        } else {
-            if (board[other][start + (i * direction)] != null)
-                return false;
-        }
-    }
-
-    return true;
+function isCompromising(board: Square[][], start: CoordinatePair, end: CoordinatePair) {
+    // TODO: ensure that king cannot move to a place which will put player in checkmate
+    return false;
 }

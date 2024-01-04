@@ -16,7 +16,7 @@ export function newKnight(colour: Colours, parent: (Square | null) = null): Knig
 
         let x = Math.abs(start.x - end.x);
         let y = Math.abs(start.y - end.y);
-        console.log([x,y]);
+        // console.log([x,y]);
         return (x * y == 2);
     }
 

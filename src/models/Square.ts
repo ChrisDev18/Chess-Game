@@ -1,17 +1,5 @@
 import {Piece} from "./pieces/Piece";
 
-// export class Square_class {
-//     piece: Piece | null = null;
-//     x: number;
-//     y: number;
-//     highlighted = false;
-//
-//     constructor(x: number, y: number) {
-//         this.x = x;
-//         this.y = y;
-//     }
-// }
-
 export interface Square {
     piece: Piece | null;
     x: number;

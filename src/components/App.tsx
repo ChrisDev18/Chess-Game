@@ -9,7 +9,10 @@ export default function App() {
 
     return (
         <div className="App">
-            <h1>Chess Game</h1>
+            <div id={"game-stats"}>
+                <h1>Chess Game</h1>
+                <p>It's {game.current_player.colour}'s turn</p>
+            </div>
             <BoardView gameState={[game, setGame]}/>
         </div>
     );

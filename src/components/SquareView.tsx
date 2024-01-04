@@ -7,14 +7,17 @@ import {Game} from "../models/Game";
 
 type args = {
     square: Square,
-    gameState: [Game, any]
+    gameState: [Game, any],
+    radioState: [number | null,  React.Dispatch<React.SetStateAction<number|null>>];
+    i: number
 }
 
 // React Component for a square within a chessboard
-export default function SquareView({square, gameState}: args) {
+export default function SquareView({square, gameState, radioState, i}: args) {
     const [game, setGame] = gameState;
+    const [selectedPiece, setSelectedPiece] = radioState;
 
-    function deselectAll() {
+    function clearHighlighted() {
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
                 setGame((game: Game) => {
@@ -24,18 +27,23 @@ export default function SquareView({square, gameState}: args) {
         }
     }
 
-    function select() {
-
-        // // select the current piece
-        // setGame((game: Game) => {
-        //     game.board.board[square.y][square.x].selected = true;
-        // });
+    function select(e: any) {
 
         // ensure no erroneous conditions
         if (square.piece == null || square.piece.parent == null) {
             throw new Error("Cannot check moves on a null piece " +
                 "or a piece from off the board");
         }
+
+        // if clicking to deselect
+        if (selectedPiece == e.target.value) {
+            clearHighlighted();
+            setSelectedPiece(null);
+            return;
+        }
+
+        // select the Piece just clicked
+        setSelectedPiece(e.target.value);
 
         // find all possible moves
         let moves = [];
@@ -52,11 +60,16 @@ export default function SquareView({square, gameState}: args) {
             }
         }
 
-        deselectAll();
+        clearHighlighted();
+
+        if (moves.length == 0) {
+            setSelectedPiece(null);
+            console.log(selectedPiece);
+        }
 
         // highlight possible moves
         moves.forEach((end) => {
-            console.log(`Set square ${[end.x, end.y]} as highlighted`);
+            // console.log(`Set square ${[end.x, end.y]} as highlighted`);
             setGame((game: Game) => {
                 game.board.board[end.y][end.x].highlighted = true;
             });
@@ -66,11 +79,14 @@ export default function SquareView({square, gameState}: args) {
     if (square.piece == null)
         return <div className={"Square" + (square.highlighted ? " Highlighted" : "")}></div>;
 
+
     return (
         <div className={"Square" + (square.highlighted ? " Highlighted" : "")}>
             <PieceView piece={square.piece.piece}
                        colour={square.piece.colour}
                        onClick={select}
+                       selectedPiece={selectedPiece}
+                       i={i}
             />
         </div>
     );

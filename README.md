@@ -30,11 +30,11 @@ _These can be viewed in the [models folder](src/models)._
 
 **As well as the pieces (which all implement [Piece](src/models/pieces/Piece.ts)):**
 - [Pawn](src/models/pieces/Pawn.ts)
-- Bishop (Not yet implemented)
+- [Bishop](src/models/pieces/Bishop.ts)
 - [Knight](src/models/pieces/Knight.ts)
 - [Rook](src/models/pieces/Rook.ts)
-- Queen (Not yet implemented)
-- King (Not yet implemented)
+- [Queen](src/models/pieces/Queen.ts)
+- [King](src/models/pieces/King.ts)
 
 _Pieces can be viewed in the [models/pieces folder](src/models/pieces)._
 

@@ -1,3 +1,4 @@
+
 .Piece {
   display: flex;
   height: 80%;
@@ -17,6 +18,23 @@
 
 .Piece:has([type=radio]:checked) {
   transform: scale(0.9);
+}
+
+.Piece:hover {
+  transform: scale(0.9);
+}
+
+.Piece:active {
+  transform: scale(0.8);
+}
+
+
+.Piece:hover {
+  transform: scale(0.9);
+}
+
+.Piece:active {
+  transform: scale(0.8);
 }
 
 .Piece:has([type=radio]:checked) img {
@@ -49,7 +67,7 @@ img {
   cursor: pointer;
 }
 
-/* CHECKED STYLES */
-[type=radio]:checked + img {
-  outline: 2px solid #f00;
-}
+/*!* CHECKED STYLES *!*/
+/*[type=radio]:checked + img {*/
+/*  outline: 2px solid #f00;*/
+/*}*/

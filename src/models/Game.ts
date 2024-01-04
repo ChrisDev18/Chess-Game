@@ -2,13 +2,6 @@ import {Colours} from "./enums";
 import {ChessBoard, newChessBoard} from "./ChessBoard";
 import {newPlayer, Player} from "./Player";
 
-// export class Game_class {
-//     board = new ChessBoard();
-//     player1 = new Player(Colours.WHITE);
-//     player2 = new Player(Colours.BLACK);
-//     current_player = this.player1;
-// }
-
 export interface Game {
     board: ChessBoard,
     player1: Player,
