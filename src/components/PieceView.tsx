@@ -5,7 +5,7 @@ import {Colours, Pieces} from "../models/enums";
 type args = {
     piece: Pieces,
     colour: Colours,
-    onClick: any
+    onClick: React.ReactEventHandler<HTMLInputElement>
 }
 
 // React Component for a chess piece
@@ -13,8 +13,9 @@ export default function PieceView({piece, colour, onClick}: args) {
     const name = `Piece=${piece}, Colour=${colour}.svg`;
 
     return (
-        <button className="Piece" onClick={onClick}>
+        <label className="Piece">
             <img alt={`${colour} ${piece}`} src={`${process.env.PUBLIC_URL}/pieces/${name}`}/>
-        </button>
+            <input type="radio" name="selected_piece" onClick={onClick} value={piece}/>
+        </label>
     );
 }

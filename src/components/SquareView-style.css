@@ -1,10 +1,11 @@
 .Square {
     aspect-ratio: 1;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    background-color: #B7C0D8;
+    background-color: #E8EDF9;
 }
 
 /*To get the checker board*/
@@ -12,9 +13,24 @@
 :nth-child(16n-11), :nth-child(16n-9),
 :nth-child(16n-6), :nth-child(16n-4), :nth-child(16n-2),
 :nth-child(16n) {
-    background-color: #E8EDF9;
+    background-color: #B7C0D8;
 }
 
-.Square.Highlighted {
-    background-color: #b1a7f8;
+.Square:after {
+    transition: all 100ms ease-out;
+    content: '';
+    width: 0%;
+    height: 0%;
+    border-radius: 100%;
+    position: absolute;
+    background-color: rgba(69, 58, 129, 0.5);
+    opacity: 0;
+}
+
+
+
+.Square.Highlighted:after {
+    opacity: 100%;
+    width: 50%;
+    height: 50%;
 }

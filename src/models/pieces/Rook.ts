@@ -70,11 +70,11 @@ export function newRook(colour: Colours, parent: (Square | null) = null): Rook {
         let dx = end.x - start.x;
 
         if (dy == 0 && dx != 0) {
-            return rook_free_movement(board, start.x, end.x, false, start.y);
+            return free_movement(board, start.x, end.x, false, start.y);
         }
 
         else if (dy != 0 && dx == 0) {
-            return rook_free_movement(board, start.y, end.y, true, start.x);
+            return free_movement(board, start.y, end.y, true, start.x);
         }
 
         return false;
@@ -93,7 +93,7 @@ export function newRook(colour: Colours, parent: (Square | null) = null): Rook {
 
 }
 
-function rook_free_movement(board: Square[][], start: number, end: number, y_displacement: boolean, other: number): boolean {
+function free_movement(board: Square[][], start: number, end: number, y_displacement: boolean, other: number): boolean {
     let direction: number;
     if (start > end)
         direction = -1;

@@ -1,5 +1,5 @@
 import PieceView from "./PieceView";
-import React from "react";
+import React, {useState} from "react";
 import "./SquareView-style.css"
 import {CoordinatePair} from "../models/Move";
 import {Square} from "../models/Square";
@@ -14,14 +14,30 @@ type args = {
 export default function SquareView({square, gameState}: args) {
     const [game, setGame] = gameState;
 
-    function checkMoves() {
+    function deselectAll() {
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                setGame((game: Game) => {
+                    game.board.board[i][j].highlighted = false;
+                });
+            }
+        }
+    }
+
+    function select() {
+
+        // // select the current piece
+        // setGame((game: Game) => {
+        //     game.board.board[square.y][square.x].selected = true;
+        // });
+
+        // ensure no erroneous conditions
         if (square.piece == null || square.piece.parent == null) {
             throw new Error("Cannot check moves on a null piece " +
                 "or a piece from off the board");
         }
 
-        console.log(`Running checkMoves on ${square.piece.piece}`);
-
+        // find all possible moves
         let moves = [];
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
@@ -36,6 +52,9 @@ export default function SquareView({square, gameState}: args) {
             }
         }
 
+        deselectAll();
+
+        // highlight possible moves
         moves.forEach((end) => {
             console.log(`Set square ${[end.x, end.y]} as highlighted`);
             setGame((game: Game) => {
@@ -45,13 +64,13 @@ export default function SquareView({square, gameState}: args) {
     }
 
     if (square.piece == null)
-        return <div className={"Square" + (square.highlighted ? "Highlighted" : "")}></div>;
+        return <div className={"Square" + (square.highlighted ? " Highlighted" : "")}></div>;
 
     return (
-        <div className={"Square" + (square.highlighted ? "Highlighted" : "")}>
+        <div className={"Square" + (square.highlighted ? " Highlighted" : "")}>
             <PieceView piece={square.piece.piece}
                        colour={square.piece.colour}
-                       onClick={checkMoves}
+                       onClick={select}
             />
         </div>
     );
