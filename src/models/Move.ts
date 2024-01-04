@@ -1,4 +1,4 @@
-import Piece from "./pieces/Piece";
+import {Piece} from "./pieces/Piece";
 
 export type Move = {
     start: CoordinatePair;

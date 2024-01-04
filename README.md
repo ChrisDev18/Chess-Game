@@ -15,9 +15,12 @@ _Both Components and Stylesheets can be viewed in the [components folder](src/co
 _Note: [`index.tsx`](src/index.tsx), which connects the React app to the browser DOM,
 is held in the [src folder](src)_
 
-## Game logic written with TS classes
-Behind the UI is a hierarchy of classes which hold data and control
-the logic of the chess game. **There are classes for:**
+## Game logic written with TS objects
+_Originally, the logic was coded using Classes and Objects.
+These have now been reworked using Objects and Interfaces as these work better with React's state system._
+
+Behind the UI is a hierarchy of objects based off interfaces which hold data and control
+the logic of the chess game. **There are Interfaces for:**
 - [Game](src/models/Game.ts) - Controls the flow of the game - this is the highest class
 - [Player](src/models/Player.ts) - Acts as a controller for any moves made.
 - [Chessboard](src/models/ChessBoard.ts) - Holds the array of chessboard squares
@@ -25,7 +28,7 @@ the logic of the chess game. **There are classes for:**
 
 _These can be viewed in the [models folder](src/models)._
 
-**As well as the pieces (which all extend [Piece](src/models/pieces/Piece.ts)):**
+**As well as the pieces (which all implement [Piece](src/models/pieces/Piece.ts)):**
 - [Pawn](src/models/pieces/Pawn.ts)
 - Bishop (Not yet implemented)
 - [Knight](src/models/pieces/Knight.ts)

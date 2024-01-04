@@ -1,8 +1,6 @@
-import Piece from "./pieces/Piece";
-import {immerable} from "immer"
+import {Piece} from "./pieces/Piece";
 
-export default class Square {
-    [immerable] = true;
+export class Square_class {
     piece: Piece | null = null;
     x: number;
     y: number;
@@ -12,4 +10,21 @@ export default class Square {
         this.x = x;
         this.y = y;
     }
+}
+
+export interface Square {
+    piece: Piece | null;
+    x: number;
+    y: number;
+    highlighted: boolean;
+}
+
+export function newSquare(x: number, y: number): Square {
+    return {
+        piece: null,
+        x: x,
+        y: y,
+        highlighted: false
+    }
+
 }

@@ -1,19 +1,27 @@
-import ChessBoard from "../ChessBoard";
-import {Move, CoordinatePair} from "../Move";
+import {CoordinatePair} from "../Move";
 import {Colours, Pieces} from "../enums";
-import Square from "../Square";
+import {Square} from "../Square";
 
-export default abstract class Piece {
-    abstract colour: Colours;
-    abstract piece: Pieces;
+// export abstract class Piece_class {
+//     abstract colour: Colours;
+//     abstract piece: Pieces;
+//
+//     killed: boolean = false;
+//     highlighted: boolean = false;
+//     parent: Square | null;
+//
+//     protected constructor(parent: (Square | null) = null) {
+//         this.parent = parent
+//     }
+//
+//     abstract canMove(board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean;
+// }
 
-    killed: boolean = false;
-    highlighted: boolean = false;
+export interface Piece {
+    colour: Colours;
+    piece: Pieces;
+    killed: boolean;
+    highlighted: boolean;
     parent: Square | null;
-
-    protected constructor(parent: (Square | null) = null) {
-        this.parent = parent
-    }
-
-    abstract canMove(board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean;
+    canMove(board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean;
 }

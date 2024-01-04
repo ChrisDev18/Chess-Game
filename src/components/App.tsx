@@ -1,11 +1,11 @@
 import React from 'react';
 import './App-style.css';
 import BoardView from "./BoardView";
-import Game from "../models/Game";
+import {newGame} from "../models/Game";
 import {useImmer} from "use-immer";
 
 export default function App() {
-    const [game, setGame] = useImmer(new Game())
+    const [game, setGame] = useImmer(newGame())
 
     return (
         <div className="App">

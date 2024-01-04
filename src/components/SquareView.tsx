@@ -1,10 +1,9 @@
 import PieceView from "./PieceView";
 import React from "react";
-import { useImmer } from 'use-immer'
 import "./SquareView-style.css"
 import {CoordinatePair} from "../models/Move";
-import Square from "../models/Square";
-import Game from "../models/Game";
+import {Square} from "../models/Square";
+import {Game} from "../models/Game";
 
 type args = {
     square: Square,
