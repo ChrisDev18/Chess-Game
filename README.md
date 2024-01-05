@@ -1,5 +1,7 @@
 # Chess written in TypeScript
 #### A basic chess game written using TypeScript.
+![Screenshot 2024-01-05 at 00 19 13](https://github.com/ChrisDev18/Chess-Game/assets/95181085/d2070ec4-7caa-4b9d-98d9-6f7ec4289580)
+
 
 ## A UI written in React
 The User Interface is written using functional React components.
@@ -21,7 +23,7 @@ These have now been reworked using Objects and Interfaces as these work better w
 
 Behind the UI is a hierarchy of objects based off interfaces which hold data and control
 the logic of the chess game. **There are Interfaces for:**
-- [Game](src/models/Game.ts) - Controls the flow of the game - this is the highest class
+- [Game](src/models/Game.ts) - Controls the flow of the game - this is the highest-level interface
 - [Player](src/models/Player.ts) - Acts as a controller for any moves made.
 - [Chessboard](src/models/ChessBoard.ts) - Holds the array of chessboard squares
 - [Square](src/models/Square.ts) - Holds information about which piece is on a given square.
