@@ -31,7 +31,8 @@ export function newQueen(colour: Colours, parent: (Square | null) = null): Queen
         // implemented from Piece
         parent: parent,
         killed: false,
-        highlighted: false
+        highlighted: false,
+        moved: false
     };
 
 }

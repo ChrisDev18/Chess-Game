@@ -24,9 +24,8 @@ export function newChessBoard(): ChessBoard {
     }
 
     // set up the board with chess pieces
+    // set the top of the board as black
     let colour = Colours.BLACK;
-
-    // set the top of the board as white
     board[0][0].piece = newRook(colour, board[0][0]);
     board[0][1].piece = newKnight(colour, board[0][1]);
     board[0][2].piece = newBishop(colour, board[0][2]);
@@ -35,14 +34,14 @@ export function newChessBoard(): ChessBoard {
     board[0][5].piece = newBishop(colour, board[0][5]);
     board[0][6].piece = newKnight(colour, board[0][6]);
     board[0][7].piece = newRook(colour, board[0][7]);
-
     // set the pawns on the next row
     for (let i=0; i<8; i++) {
         board[1][i].piece = newPawn(colour, board[1][i]);
     }
 
+
+    // set the bottom of the board as white
     colour = Colours.WHITE;
-    // set the bottom of the board as black
     board[7][0].piece = newRook(colour, board[7][0]);
     board[7][1].piece = newKnight(colour, board[7][1]);
     board[7][2].piece = newBishop(colour, board[7][2]);

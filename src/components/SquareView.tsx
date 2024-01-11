@@ -1,9 +1,10 @@
 import PieceView from "./PieceView";
-import React, {useState} from "react";
+import React from "react";
 import "./SquareView-style.css"
 import {CoordinatePair} from "../models/Move";
 import {Square} from "../models/Square";
 import {Game} from "../models/Game";
+import {Colours} from "../models/enums";
 
 type args = {
     square: Square,
@@ -87,6 +88,8 @@ export default function SquareView({square, gameState, radioState, i}: args) {
                        onClick={select}
                        selectedPiece={selectedPiece}
                        i={i}
+                       disabled={square.piece.colour != game.current_player.colour}
+                       rotated={game.current_player.colour != Colours.WHITE}
             />
         </div>
     );

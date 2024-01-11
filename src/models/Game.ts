@@ -11,11 +11,12 @@ export interface Game {
 
 export function newGame(): Game {
     let player1 = newPlayer(Colours.WHITE);
+    let player2 = newPlayer(Colours.BLACK);
 
     return {
         board: newChessBoard(),
         player1: player1,
-        player2: newPlayer(Colours.BLACK),
+        player2: player2,
         current_player: player1
     };
 }

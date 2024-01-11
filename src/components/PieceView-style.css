@@ -8,41 +8,6 @@
   -webkit-transition: all 100ms ease-out;
 }
 
-.Piece:hover {
-  transform: scale(0.9);
-}
-
-.Piece:active {
-  transform: scale(0.8);
-}
-
-.Piece:has([type=radio]:checked) {
-  transform: scale(0.9);
-}
-
-.Piece:hover {
-  transform: scale(0.9);
-}
-
-.Piece:active {
-  transform: scale(0.8);
-}
-
-
-.Piece:hover {
-  transform: scale(0.9);
-}
-
-.Piece:active {
-  transform: scale(0.8);
-}
-
-.Piece:has([type=radio]:checked) img {
-  transform: translateY(-4px);
-  filter: drop-shadow(0 12px 8px rgba(0, 0, 0, 0.25)) ;
-}
-
-
 img {
   height: 100%;
   width: 100%;
@@ -50,9 +15,35 @@ img {
   -webkit-transition: all 100ms ease-out;
 }
 
-.Piece:active img {
-  filter: brightness(0.8);
+.Rotated {
+  rotate: 180deg;
 }
+
+.Piece:has([type=radio]:enabled) {
+
+  &:hover {
+    transform: scale(0.9);
+  }
+
+  &:active {
+    transform: scale(0.8);
+  }
+
+  &:has([type=radio]:checked) {
+    transform: scale(0.9);
+  }
+
+  &:has([type=radio]:checked) img {
+    transform: translateY(-4px);
+    filter: drop-shadow(0 12px 8px rgba(0, 0, 0, 0.25)) ;
+  }
+
+  &:active img {
+    filter: brightness(0.8);
+  }
+
+}
+
 
 /* HIDE RADIO */
 [type=radio] {
@@ -66,8 +57,3 @@ img {
 [type=radio] + img {
   cursor: pointer;
 }
-
-/*!* CHECKED STYLES *!*/
-/*[type=radio]:checked + img {*/
-/*  outline: 2px solid #f00;*/
-/*}*/

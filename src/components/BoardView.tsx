@@ -2,6 +2,7 @@ import './BoardView-style.css';
 import {Game} from "../models/Game";
 import React, {useState} from "react";
 import SquareView from "./SquareView";
+import {Colours} from "../models/enums";
 
 // React Component for a chessboard
 export default function BoardView({gameState}: {gameState: [Game, any]}) {
@@ -14,7 +15,7 @@ export default function BoardView({gameState}: {gameState: [Game, any]}) {
     );
 
     return (
-        <div className="ChessBoard">
+        <div className={"ChessBoard" + (game.current_player.colour != Colours.WHITE ? " Rotated" : "")}>
             {grid}
         </div>
     );

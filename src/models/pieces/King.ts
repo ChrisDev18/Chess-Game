@@ -1,6 +1,6 @@
 import {Colours, Pieces} from "../enums";
 import {CoordinatePair} from "../Move";
-import {free_movement, Piece} from "./Piece";
+import {Piece} from "./Piece";
 import {Square} from "../Square";
 
 export interface King extends Piece {}
@@ -27,7 +27,8 @@ export function newKing(colour: Colours, parent: (Square | null) = null): King {
         // implemented from Piece
         parent: parent,
         killed: false,
-        highlighted: false
+        highlighted: false,
+        moved: false
     };
 }
 

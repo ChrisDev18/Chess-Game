@@ -1,6 +1,8 @@
-import {CoordinatePair} from "../Move";
+import {CoordinatePair, Move} from "../Move";
 import {Colours, Pieces} from "../enums";
 import {Square} from "../Square";
+import {Player} from "../Player";
+
 
 export interface Piece {
     colour: Colours;
@@ -8,9 +10,13 @@ export interface Piece {
     killed: boolean;
     highlighted: boolean;
     parent: Square | null;
+    moved: boolean;
     canMove(board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean;
 }
 
+// ---Implemented Functions---
+
+// Checks for any pieces between valid start and end squares
 export function free_movement(board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean {
     let vector = [0, 0];
 
@@ -56,5 +62,40 @@ export function free_movement(board: Square[][], start: CoordinatePair, end: Coo
 
     }
 
+    return true;
+}
+
+// Moves a piece based on a given Move object. (Should only pass valid moves to function!)
+export function move(player: Player, board: Square[][], move: Move): boolean {
+    let startSquare = board[move.start.y][move.start.x];
+    if (startSquare.piece == null) {
+        console.error("No start piece on designated start square to move - this should not be possible with current UI implementation");
+        return false;
+    }
+
+    if (! startSquare.piece.canMove(board, move.start, move.end)) {
+        console.error("Piece cannot be moved - this should not be possible with current UI implementation");
+        return false;
+    }
+
+    // check for a piece at the end of the move
+    let endSquare = board[move.end.y][move.end.x];
+    if (endSquare.piece != null) {
+        // check the piece is opposite colour
+        if (endSquare.piece.colour == startSquare.piece.colour) {
+            console.error("Cannot move to square occupied with like-coloured piece - this should not be possible with current UI implementation");
+            return false;
+        }
+
+        // take the piece
+        startSquare.piece.parent = null;
+        player.taken_pieces.push(startSquare.piece);
+    }
+
+    // move the piece
+    startSquare.piece.parent = endSquare;  // change the parent of moving piece
+    endSquare.piece = startSquare.piece;  // move piece
+    endSquare.piece.moved = true; // mark as moved
+    startSquare.piece = null;  // delete from old position
     return true;
 }

@@ -31,7 +31,8 @@ export function newBishop(colour: Colours, parent: (Square | null) = null): Bish
         // implemented from Piece
         parent: parent,
         killed: false,
-        highlighted: false
+        highlighted: false,
+        moved: false,
     };
 
 }

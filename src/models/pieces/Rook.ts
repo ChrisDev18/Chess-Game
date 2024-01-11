@@ -31,7 +31,8 @@ export function newRook(colour: Colours, parent: (Square | null) = null): Rook {
         // implemented from Piece
         parent: parent,
         killed: false,
-        highlighted: false
+        highlighted: false,
+        moved: false
     };
 
 }

@@ -1,4 +1,4 @@
-import {Piece} from "./Piece";
+import {move, Piece} from "./Piece";
 import {CoordinatePair} from "../Move";
 import {Colours, Pieces} from "../enums";
 import {Square} from "../Square";
@@ -28,7 +28,8 @@ export function newKnight(colour: Colours, parent: (Square | null) = null): Knig
         // implemented from Piece
         parent: parent,
         killed: false,
-        highlighted: false
+        highlighted: false,
+        moved: false,
     };
 
 }
