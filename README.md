@@ -9,7 +9,6 @@ There are components for:
 - [App](src/components/App.tsx) - Root component
 - [BoardView](src/components/BoardView.tsx) - Displays the chessboard
 - [SquareView](src/components/SquareView.tsx) - Renders each square of the chessboard
-- [PieceView](src/components/PieceView.tsx) - Renders each chesspiece
 
 Each component has respective styling under the file `component_name-style.css`.
 _Both Components and Stylesheets can be viewed in the [components folder](src/components)._
@@ -19,14 +18,14 @@ is held in the [src folder](src)_
 
 ## Game logic written with TS objects
 _Originally, the logic was coded using Classes and Objects.
-These have now been reworked using Objects and Interfaces as these work better with React's state system._
+These have now been reworked using Interfaces and JavaScript Objects as these work better with React's immutable state system._
 
 Behind the UI is a hierarchy of objects based off interfaces which hold data and control
 the logic of the chess game. **There are Interfaces for:**
 - [Game](src/models/Game.ts) - Controls the flow of the game - this is the highest-level interface
 - [Player](src/models/Player.ts) - Acts as a controller for any moves made.
 - [Chessboard](src/models/ChessBoard.ts) - Holds the array of chessboard squares
-- [Square](src/models/Square.ts) - Holds information about which piece is on a given square.
+- [Square](src/models/Square.ts) - Holds information about each square (which piece is on it, has it been selected, etc.).
 
 _These can be viewed in the [models folder](src/models)._
 

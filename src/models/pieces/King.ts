@@ -5,7 +5,7 @@ import {Square} from "../Square";
 
 export interface King extends Piece {}
 
-export function newKing(colour: Colours, parent: (Square | null) = null): King {
+export function newKing(colour: Colours): King {
 
     let canMove = (board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean => {
         let end_piece = board[end.y][end.x].piece;
@@ -16,7 +16,7 @@ export function newKing(colour: Colours, parent: (Square | null) = null): King {
         let dy = end.y - start.y;
         let dx = end.x - start.x;
 
-        return Math.round(Math.sqrt(dy**2 + dx**2)) == 1 && ! isCompromising(board, start, end);
+        return Math.round(Math.sqrt(dy**2 + dx**2)) === 1 && ! isCompromising(board, start, end);
     }
 
     return {
@@ -25,7 +25,6 @@ export function newKing(colour: Colours, parent: (Square | null) = null): King {
         canMove: canMove,
 
         // implemented from Piece
-        parent: parent,
         killed: false,
         highlighted: false,
         moved: false

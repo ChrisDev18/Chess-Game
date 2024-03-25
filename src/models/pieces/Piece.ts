@@ -9,7 +9,6 @@ export interface Piece {
     piece: Pieces;
     killed: boolean;
     highlighted: boolean;
-    parent: Square | null;
     moved: boolean;
     canMove(board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean;
 }
@@ -25,28 +24,28 @@ export function free_movement(board: Square[][], start: CoordinatePair, end: Coo
 
 
     // figure out suitable vector
-    if (dx == 0) {
+    if (dx === 0) {
         if (start.y < end.y)
             vector = [0, 1];
         else
             vector = [0, -1];
     }
 
-    else if (dy == 0) {
+    else if (dy === 0) {
         if (start.x < end.x)
             vector = [1, 0];
         else
             vector = [-1, 0];
     }
 
-    else if (dx == dy) {
+    else if (dx === dy) {
         if (start.x < end.x)
             vector = [1, 1];
         else
             vector = [-1, -1];
     }
 
-    else if (dx == -dy) {
+    else if (dx === -dy) {
         if (start.x < end.x)
             vector = [1, -1];
         else
@@ -82,18 +81,16 @@ export function move(player: Player, board: Square[][], move: Move): boolean {
     let endSquare = board[move.end.y][move.end.x];
     if (endSquare.piece != null) {
         // check the piece is opposite colour
-        if (endSquare.piece.colour == startSquare.piece.colour) {
+        if (endSquare.piece.colour === startSquare.piece.colour) {
             console.error("Cannot move to square occupied with like-coloured piece - this should not be possible with current UI implementation");
             return false;
         }
 
         // take the piece
-        startSquare.piece.parent = null;
         player.taken_pieces.push(startSquare.piece);
     }
 
     // move the piece
-    startSquare.piece.parent = endSquare;  // change the parent of moving piece
     endSquare.piece = startSquare.piece;  // move piece
     endSquare.piece.moved = true; // mark as moved
     startSquare.piece = null;  // delete from old position

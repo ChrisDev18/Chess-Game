@@ -5,7 +5,7 @@ import {Square} from "../Square";
 
 export interface Queen extends Piece {}
 
-export function newQueen(colour: Colours, parent: (Square | null) = null): Queen {
+export function newQueen(colour: Colours): Queen {
 
     let canMove = (board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean => {
         let end_piece = board[end.y][end.x].piece;
@@ -16,7 +16,7 @@ export function newQueen(colour: Colours, parent: (Square | null) = null): Queen
         let dy = end.y - start.y;
         let dx = end.x - start.x;
 
-        if ((dy == 0 && dx != 0) || (dy != 0 && dx == 0) || (dy == dx) || (dy == -dx)) {
+        if ((dy === 0 && dx !== 0) || (dy !== 0 && dx === 0) || (dy === dx) || (dy === -dx)) {
             return free_movement(board, start, end);
         }
 
@@ -29,7 +29,6 @@ export function newQueen(colour: Colours, parent: (Square | null) = null): Queen
         canMove: canMove,
 
         // implemented from Piece
-        parent: parent,
         killed: false,
         highlighted: false,
         moved: false

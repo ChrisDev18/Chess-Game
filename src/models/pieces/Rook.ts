@@ -5,7 +5,7 @@ import {Square} from "../Square";
 
 export interface Rook extends Piece {}
 
-export function newRook(colour: Colours, parent: (Square | null) = null): Rook {
+export function newRook(colour: Colours): Rook {
 
     let canMove = (board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean => {
         let end_piece = board[end.y][end.x].piece;
@@ -16,7 +16,7 @@ export function newRook(colour: Colours, parent: (Square | null) = null): Rook {
         let dy = end.y - start.y;
         let dx = end.x - start.x;
 
-        if ((dy == 0 && dx != 0) || (dy != 0 && dx == 0)) {
+        if ((dy === 0 && dx !== 0) || (dy !== 0 && dx === 0)) {
             return free_movement(board, start, end);
         }
 
@@ -29,7 +29,6 @@ export function newRook(colour: Colours, parent: (Square | null) = null): Rook {
         canMove: canMove,
 
         // implemented from Piece
-        parent: parent,
         killed: false,
         highlighted: false,
         moved: false

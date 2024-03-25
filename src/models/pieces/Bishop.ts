@@ -5,7 +5,7 @@ import {Square} from "../Square";
 
 export interface Bishop extends Piece {}
 
-export function newBishop(colour: Colours, parent: (Square | null) = null): Bishop {
+export function newBishop(colour: Colours): Bishop {
 
     let canMove = (board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean => {
         let end_piece = board[end.y][end.x].piece;
@@ -16,7 +16,7 @@ export function newBishop(colour: Colours, parent: (Square | null) = null): Bish
         let dy = end.y - start.y;
         let dx = end.x - start.x;
 
-        if ((dy == dx) || (dy == -dx)) {
+        if ((dy === dx) || (dy === -dx)) {
             return free_movement(board, start, end);
         }
 
@@ -29,7 +29,6 @@ export function newBishop(colour: Colours, parent: (Square | null) = null): Bish
         canMove: canMove,
 
         // implemented from Piece
-        parent: parent,
         killed: false,
         highlighted: false,
         moved: false,

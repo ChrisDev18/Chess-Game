@@ -1,21 +1,21 @@
 import './BoardView-style.css';
 import {Game} from "../models/Game";
-import React, {useState} from "react";
+import React from "react";
 import SquareView from "./SquareView";
 import {Colours} from "../models/enums";
+import {Updater} from "use-immer";
 
 // React Component for a chessboard
-export default function BoardView({gameState}: {gameState: [Game, any]}) {
-    const [game,_] = gameState;
-    const selectedState = useState<number|null>(null)
+export default function BoardView({gameState}: {gameState: [Game, Updater<Game>]}) {
+    const [game] = gameState;
     const grid = game.board.board.map((row, i)=>
         row.map((square, j)=>
-            <SquareView square={square} gameState={gameState} radioState={selectedState} i={parseInt(""+i+j)}/>
+            <SquareView currentSquare={square} gameState={gameState} coordinate={{x: j, y: i}}/>
         )
     );
 
     return (
-        <div className={"ChessBoard" + (game.current_player.colour != Colours.WHITE ? " Rotated" : "")}>
+        <div className={"ChessBoard" + (game.current_player.colour !== Colours.WHITE ? " Rotated" : "")}>
             {grid}
         </div>
     );
