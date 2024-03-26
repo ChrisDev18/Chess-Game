@@ -1,7 +1,9 @@
 import {CoordinatePair, Move} from "../Move";
 import {Colours, Pieces} from "../enums";
 import {Square} from "../Square";
-import {Player} from "../Player";
+import {Game} from "../Game";
+import produce from 'immer';
+
 
 
 export interface Piece {
@@ -65,34 +67,36 @@ export function free_movement(board: Square[][], start: CoordinatePair, end: Coo
 }
 
 // Moves a piece based on a given Move object. (Should only pass valid moves to function!)
-export function move(player: Player, board: Square[][], move: Move): boolean {
-    let startSquare = board[move.start.y][move.start.x];
-    if (startSquare.piece == null) {
-        console.error("No start piece on designated start square to move - this should not be possible with current UI implementation");
-        return false;
-    }
-
-    if (! startSquare.piece.canMove(board, move.start, move.end)) {
-        console.error("Piece cannot be moved - this should not be possible with current UI implementation");
-        return false;
-    }
-
-    // check for a piece at the end of the move
-    let endSquare = board[move.end.y][move.end.x];
-    if (endSquare.piece != null) {
-        // check the piece is opposite colour
-        if (endSquare.piece.colour === startSquare.piece.colour) {
-            console.error("Cannot move to square occupied with like-coloured piece - this should not be possible with current UI implementation");
-            return false;
+export function move(game: Game, move: Move): Game {
+    return produce(game, draftGame => {
+        let startSquare = draftGame.board.board[move.start.y][move.start.x];
+        if (startSquare.piece == null) {
+            console.error("No start piece on designated start square to move - this should not be possible with current UI implementation");
+            return game;
         }
 
-        // take the piece
-        player.taken_pieces.push(startSquare.piece);
-    }
+        if (!startSquare.piece.canMove(draftGame.board.board, move.start, move.end)) {
+            console.error("Piece cannot be moved - this should not be possible with current UI implementation");
+            return game;
+        }
 
-    // move the piece
-    endSquare.piece = startSquare.piece;  // move piece
-    endSquare.piece.moved = true; // mark as moved
-    startSquare.piece = null;  // delete from old position
-    return true;
+        // check for a piece at the end of the move
+        let endSquare = draftGame.board.board[move.end.y][move.end.x];
+        if (endSquare.piece != null) {
+            // check the piece is opposite colour
+            if (endSquare.piece.colour === startSquare.piece.colour) {
+                console.error("Cannot move to square occupied with like-coloured piece - this should not be possible with current UI implementation");
+                return game;
+            }
+
+            // take the piece
+            draftGame.current_player.taken_pieces.push(startSquare.piece);
+        }
+
+        // move the piece
+        endSquare.piece = startSquare.piece;  // move piece
+        endSquare.piece.moved = true; // mark as moved
+        startSquare.piece = null;  // delete from old position
+        return draftGame;
+    });
 }

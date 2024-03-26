@@ -1,18 +1,20 @@
 import React, {ChangeEvent} from "react";
 import "./SquareView-style.css"
-import {CoordinatePair} from "../models/Move";
+import {CoordinatePair, Move} from "../models/Move";
 import {Square} from "../models/Square";
-import {Game} from "../models/Game";
+import {Game, switchPlayer} from "../models/Game";
 import {Updater} from "use-immer";
+import {move} from "../models/pieces/Piece";
+import {Colours} from "../models/enums";
 
 type args = {
     currentSquare: Square,
     gameState: [Game, Updater<Game>],
-    coordinate: CoordinatePair
+    currentCoordinates: CoordinatePair
 }
 
 // React Component for a square within a chessboard
-export default function SquareView({currentSquare, gameState, coordinate}: args) {
+export default function SquareView({currentSquare, gameState, currentCoordinates}: args) {
     const [game, setGame] = gameState;
 
     const handleSelect = (e: ChangeEvent<HTMLInputElement>) => {
@@ -85,6 +87,17 @@ export default function SquareView({currentSquare, gameState, coordinate}: args)
 
     const moveSelectedPiece = (moveTo: CoordinatePair) => {
         console.log(`moveSelectedPiece to ${moveTo.x} ${moveTo.y}`)
+        if (game.board.selected_piece === null) throw new Error("Cannot move if no piece has been selected");
+
+        const movement: Move = {
+            start: game.board.selected_piece,
+            end: currentCoordinates
+        }
+
+        let update = move(game, movement);
+        update = switchPlayer(update);
+        setGame(update);
+        putDownPiece();
     }
 
     const putDownPiece = () => {
@@ -108,12 +121,9 @@ export default function SquareView({currentSquare, gameState, coordinate}: args)
     if (currentSquare.piece == null)
         return (
           <div className={"Square" + (currentSquare.highlighted ? " Highlighted" : "")}>
-
-              <input type="radio"
-                     onChange={handleSelect}
-                     value={"" + coordinate.x + "," + coordinate.y}
-                     checked={false}
-                     disabled={!game.board.board[coordinate.y][coordinate.x].highlighted}
+              <button className="visible"
+                      onClick={() => moveSelectedPiece(currentCoordinates)}
+                      disabled={!currentSquare.highlighted}
               />
           </div>
         );
@@ -123,15 +133,15 @@ export default function SquareView({currentSquare, gameState, coordinate}: args)
     return (
       <div className={"Square" + (currentSquare.highlighted ? " Highlighted" : "")}>
           <label className="Piece">
-              <img className={currentSquare.piece.colour !== game.current_player.colour ? "Rotated" : ""}
+              <img className={game.current_player.colour === Colours.BLACK ? "Rotated" : ""}
                    src={`${process.env.PUBLIC_URL}/pieces/${name}`}
                    alt={`${currentSquare.piece.colour} ${currentSquare.piece.piece}`}
               />
 
               <input type="radio"
                      onChange={handleSelect}
-                     value={"" + coordinate.x + "," + coordinate.y}
-                     checked={game.board.selected_piece === coordinate}
+                     value={"" + currentCoordinates.x + "," + currentCoordinates.y}
+                     checked={game.board.selected_piece === currentCoordinates}
                      disabled={game.current_player.colour !== currentSquare.piece.colour}
               />
           </label>

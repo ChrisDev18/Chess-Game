@@ -10,7 +10,7 @@ export default function BoardView({gameState}: {gameState: [Game, Updater<Game>]
     const [game] = gameState;
     const grid = game.board.board.map((row, i)=>
         row.map((square, j)=>
-            <SquareView currentSquare={square} gameState={gameState} coordinate={{x: j, y: i}}/>
+            <SquareView currentSquare={square} gameState={gameState} currentCoordinates={{x: j, y: i}}/>
         )
     );
 

@@ -25,6 +25,7 @@
     position: absolute;
     background-color: rgba(69, 58, 129, 0.5);
     opacity: 0;
+    pointer-events: none;
 }
 
 .Square.Highlighted:after {
@@ -40,7 +41,7 @@
     width: 80%;
     background-color: transparent;
     border: unset;
-    -webkit-transition: all 100ms ease-out;
+    transition: all 100ms ease-out;
 }
 
 
@@ -49,11 +50,11 @@ img {
     height: 100%;
     width: 100%;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
-    -webkit-transition: all 100ms ease-out;
+    transition: rotate 1s ease-in-out;
 }
 
 .Rotated {
-    rotate: 180deg;
+    rotate: -180deg;
 }
 
 .Piece:has([type=radio]:enabled) {

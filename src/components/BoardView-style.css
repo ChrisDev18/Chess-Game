@@ -15,7 +15,7 @@
   grid-template-columns: repeat(8, 12.5%);
   grid-template-rows: repeat(8, 12.5%);
 
-  transition: rotate 500ms ease-in-out;
+  transition: rotate 1s ease-in-out;
 }
 
 .Rotated {
