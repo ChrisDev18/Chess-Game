@@ -97,6 +97,14 @@ export function move(game: Game, move: Move): Game {
         endSquare.piece = startSquare.piece;  // move piece
         endSquare.piece.moved = true; // mark as moved
         startSquare.piece = null;  // delete from old position
+
+        // swap players
+        if (game.current_player === game.player1) {
+            draftGame.current_player = draftGame.player2
+        } else {
+            draftGame.current_player = draftGame.player1
+        }
+
         return draftGame;
     });
 }

@@ -1,7 +1,6 @@
 import {Colours} from "./enums";
 import {ChessBoard, newChessBoard} from "./ChessBoard";
 import {newPlayer, Player} from "./Player";
-import produce from "immer";
 
 export interface Game {
     board: ChessBoard,
@@ -22,13 +21,3 @@ export function newGame(): Game {
     };
 }
 
-export function switchPlayer(game: Game): Game {
-    return produce(game, draftGame => {
-        if (game.current_player === game.player1) {
-            draftGame.current_player = game.player2
-        } else {
-            draftGame.current_player = game.player1
-        }
-        return draftGame;
-    });
-}

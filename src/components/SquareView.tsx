@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import "./SquareView-style.css"
 import {CoordinatePair, Move} from "../models/Move";
 import {Square} from "../models/Square";
-import {Game, switchPlayer} from "../models/Game";
+import {Game} from "../models/Game";
 import {Updater} from "use-immer";
 import {move} from "../models/pieces/Piece";
 import {Colours} from "../models/enums";
@@ -53,7 +53,6 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
         // // select the Piece just clicked
         setGame(draft => {
             draft.board.selected_piece = pickupFrom;
-            console.log(`selected piece at position: ${pickupFrom.x} ${pickupFrom.y}`);
         });
 
         // find all possible moves
@@ -94,9 +93,9 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
             end: currentCoordinates
         }
 
-        let update = move(game, movement);
-        update = switchPlayer(update);
-        setGame(update);
+        const updatedGame = move(game, movement);
+        setGame(updatedGame);
+
         putDownPiece();
     }
 
@@ -121,10 +120,11 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
     if (currentSquare.piece == null)
         return (
           <div className={"Square" + (currentSquare.highlighted ? " Highlighted" : "")}>
-              <button className="visible"
-                      onClick={() => moveSelectedPiece(currentCoordinates)}
-                      disabled={!currentSquare.highlighted}
-              />
+              {currentSquare.highlighted &&
+                <button onClick={() => moveSelectedPiece(currentCoordinates)}
+                        disabled={!currentSquare.highlighted}
+                />
+              }
           </div>
         );
 
@@ -132,6 +132,13 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
 
     return (
       <div className={"Square" + (currentSquare.highlighted ? " Highlighted" : "")}>
+          {currentSquare.highlighted &&
+            <button onClick={() => moveSelectedPiece(currentCoordinates)}
+                    disabled={!currentSquare.highlighted}
+            />
+          }
+
+
           <label className="Piece">
               <img className={game.current_player.colour === Colours.BLACK ? "Rotated" : ""}
                    src={`${process.env.PUBLIC_URL}/pieces/${name}`}
