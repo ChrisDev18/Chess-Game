@@ -23,11 +23,11 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
         const [x, y] = target.value.split(',', 2).map(Number) as [number, number];
         const position: CoordinatePair = {x, y};
 
-        // The interaction marks the beginning of a new move
+        // If the interaction marks the beginning of a new move
         if (game.board.selected_piece === null && currentSquare.piece !== null)
             pickUpPiece(position);
 
-        // The interaction marks the movement of a piece
+        // If the interaction marks the movement of a piece
         else if (
           game.board.selected_piece !== null
           && currentSquare.piece !== null
@@ -35,11 +35,11 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
         )
             moveSelectedPiece(position);
 
-        // Interacting to put down the current piece
+        // If interacting to put down the current piece
         else if (game.board.selected_piece === position)
             putDownPiece();
 
-        // Interacting to put down the current piece
+        // If interacting to put down the current piece
         else
             pickUpPiece(position);
 
@@ -50,13 +50,13 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
 
         if (currentSquare.piece === null) throw new Error();
 
-        // // select the Piece just clicked
-        setGame(draft => {
-            draft.board.selected_piece = pickupFrom;
-        });
+
+        // setGame(draft => {
+        //     draft.board.selected_piece = pickupFrom;
+        // });
 
         // find all possible moves
-        let moves = [];
+        let moves: CoordinatePair[] = [];
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
                 // console.log(`Checking if ${square.piece.piece} can move to (${[i, j]})`);
@@ -75,12 +75,14 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
             draft.board.selected_piece = null
         });
 
+        // select the Piece just clicked
         // highlight possible moves
-        moves.forEach((end) => {
-            // console.log(`Set square ${[end.x, end.y]} as highlighted`);
-            setGame(draft => {
+        setGame(draft => {
+            draft.board.selected_piece = pickupFrom;
+
+            moves.forEach(end => {
                 draft.board.board[end.y][end.x].highlighted = true
-            });
+            })
         });
     }
 
@@ -107,13 +109,13 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
     }
 
     const clearHighlighted = () => {
-        for (let i = 0; i < 8; i++) {
-            for (let j = 0; j < 8; j++) {
-                setGame(draft => {
-                    draft.board.board[i][j].highlighted = false
-                });
+        setGame(draft => {
+            for (let i = 0; i < 8; i++) {
+                for (let j = 0; j < 8; j++) {
+                    draft.board.board[i][j].highlighted = false;
+                }
             }
-        }
+        });
     }
 
 
