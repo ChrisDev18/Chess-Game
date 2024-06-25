@@ -121,24 +121,18 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
 
     if (currentSquare.piece == null)
         return (
-          <div className={"Square" + (currentSquare.highlighted ? " Highlighted" : "")}>
-              {currentSquare.highlighted &&
-                <button onClick={() => moveSelectedPiece(currentCoordinates)}
-                        disabled={!currentSquare.highlighted}
-                />
-              }
-          </div>
+          <button onClick={() => currentSquare.highlighted ? moveSelectedPiece(currentCoordinates) : null}
+                  className={"Square" + (currentSquare.highlighted ? " Highlighted" : "")}
+                  disabled={!currentSquare.highlighted}>
+          </button>
         );
 
     const name = `Piece=${currentSquare.piece.piece}, Colour=${currentSquare.piece.colour}.svg`;
 
     return (
-      <div className={"Square" + (currentSquare.highlighted ? " Highlighted" : "")}>
-          {currentSquare.highlighted &&
-            <button onClick={() => moveSelectedPiece(currentCoordinates)}
-                    disabled={!currentSquare.highlighted}
-            />
-          }
+      <button onClick={() => currentSquare.highlighted ? moveSelectedPiece(currentCoordinates) : null}
+              className={"Square" + (currentSquare.highlighted ? " Highlighted" : "")}
+              disabled={game.current_player.colour !== currentSquare.piece.colour && !currentSquare.highlighted}>
 
 
           <label className="Piece">
@@ -154,7 +148,7 @@ export default function SquareView({currentSquare, gameState, currentCoordinates
                      disabled={game.current_player.colour !== currentSquare.piece.colour}
               />
           </label>
-      </div>
+      </button>
 
     );
 
