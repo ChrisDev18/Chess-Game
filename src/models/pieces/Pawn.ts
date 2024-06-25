@@ -6,10 +6,10 @@ import {Square} from "../Square";
 export interface Pawn extends Piece {}
 
 export function newPawn(colour: Colours): Pawn {
-    let has_moved = false;
 
     let canMove = (board: Square[][], start: CoordinatePair, end: CoordinatePair): boolean => {
         let end_piece = board[end.y][end.x].piece;
+        let start_piece = board[start.y][start.x].piece;
 
         if (end_piece?.colour === colour)
             return false;
@@ -18,16 +18,22 @@ export function newPawn(colour: Colours): Pawn {
         let dx = end.x - start.x;
 
         // assign the direction of movement
-        let direction = 1;
+        let direction = colour === Colours.WHITE ? -1 : 1;
 
-        if (colour === Colours.WHITE)
-            direction = -1;
-
+        // if moving forward
         if (dx === 0 && end_piece == null) {
-            return dy === direction || (!has_moved
-                && board[start.y + direction][start.x] != null
-                && dy === 2 * direction);
-        } else if (Math.abs(dx) === 1 && end_piece != null) {
+
+            if (dy === direction) {
+                return true;
+            }
+
+            if (dy === 2 * direction && !start_piece?.moved) {
+                return true;
+            }
+        }
+
+        // if moving sideways
+        else if (Math.abs(dx) === 1 && end_piece != null) {
             return dy === direction && end_piece.colour !== colour;
         }
 
