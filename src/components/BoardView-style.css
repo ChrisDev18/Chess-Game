@@ -2,11 +2,15 @@
   display: grid;
   max-width: 100%;
   max-height: 100%;
-  aspect-ratio: 1;
-  border-radius: 10px;
+  border-radius: 2%;
   overflow: clip;
+  aspect-ratio: 1;
 
-  width: min(70vh, 100%);
+  width: min(70%, 100%);
+  height: min(70%, 100%);
+
+
+
   justify-content: center;
   align-items: center;
 

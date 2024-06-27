@@ -2,12 +2,13 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   align-items: center;
   justify-content: center;
   align-content: center;
   gap: 24px;
   background-color: #343944;
+  padding: 64px 16px 16px;
 }
 
 #game-stats {
