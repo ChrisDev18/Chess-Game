@@ -11,10 +11,10 @@
 }
 
 /*To get the checker board*/
-.Square:nth-child(16n-15), :nth-child(16n-13),
-:nth-child(16n-11), :nth-child(16n-9),
-:nth-child(16n-6), :nth-child(16n-4), :nth-child(16n-2),
-:nth-child(16n) {
+.Square:nth-child(16n-15), .Square:nth-child(16n-13),
+.Square:nth-child(16n-11), .Square:nth-child(16n-9),
+.Square:nth-child(16n-6), .Square:nth-child(16n-4),
+.Square:nth-child(16n-2), .Square:nth-child(16n) {
     background-color: #E8EDF9;
 }
 

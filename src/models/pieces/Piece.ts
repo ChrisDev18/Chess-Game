@@ -90,7 +90,7 @@ export function move(game: Game, move: Move): Game {
             }
 
             // take the piece
-            draftGame.current_player.taken_pieces.push(startSquare.piece);
+            draftGame.current_player.taken_pieces.push(endSquare.piece);
         }
 
         // move the piece
@@ -100,9 +100,11 @@ export function move(game: Game, move: Move): Game {
 
         // swap players
         if (game.current_player === game.player1) {
-            draftGame.current_player = draftGame.player2
+            draftGame.player1 = draftGame.current_player;  // needed to ensure that each player's data is updated
+            draftGame.current_player = draftGame.player2;
         } else {
-            draftGame.current_player = draftGame.player1
+            draftGame.player2 = draftGame.current_player;  // needed to ensure that each player's data is updated
+            draftGame.current_player = draftGame.player1;
         }
 
         return draftGame;

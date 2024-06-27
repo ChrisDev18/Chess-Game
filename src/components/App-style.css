@@ -16,6 +16,48 @@
   gap: 10px;
 }
 
+#game {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  flex-grow: 1;
+  height: 100%;
+
+  &.reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+.Taken-Pieces {
+  display: flex;
+  align-items: center;
+  width: 80px;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  overflow: scroll;
+
+
+  &.top {
+    justify-content: flex-start;
+  }
+
+  &.bottom {
+    justify-content: flex-end;
+  }
+
+
+  .Piece {
+    display: flex;
+    width: 70%;
+    height: auto;
+    aspect-ratio: 1/1;
+    background-color: transparent;
+    border: unset;
+    transition: all 100ms ease-out;
+  }
+}
+
 h1, a , p {
   margin: 0;
   color: white;
